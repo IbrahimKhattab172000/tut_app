@@ -1,7 +1,16 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  int appState = 0;
+
+  MyApp._internal(); //private named constractor
+
+  static final MyApp instance =
+      MyApp._internal(); //single instance -- singletone
+
+  factory MyApp() => instance; // factory for the class instance
 
   @override
   State<MyApp> createState() => _MyAppState();
