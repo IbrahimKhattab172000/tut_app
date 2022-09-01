@@ -44,8 +44,10 @@ ThemeData getApplicationTheme() {
 
     // text theme
     textTheme: TextTheme(
-        displayLarge:
-            getLightStyle(color: ColorManager.white, fontSize: FontSize.s22),
+
+        //!Cannot mix 2018 and 2021 terms in call to TextTheme() constructor.
+        // displayLarge:
+        //     getLightStyle(color: ColorManager.white, fontSize: FontSize.s22),
         headline1: getSemiBoldStyle(
             color: ColorManager.darkGrey, fontSize: FontSize.s16),
         subtitle1: getMediumStyle(
