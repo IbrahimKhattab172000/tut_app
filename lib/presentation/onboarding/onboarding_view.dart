@@ -82,6 +82,60 @@ class _OnboardingViewState extends State<OnboardingView> {
           );
         },
       ),
+      bottomSheet: Container(
+        color: ColorManager.darkGrey,
+        height: AppSize.s100,
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: () {},
+                child: Text(
+                  AppStrings.skip,
+                  textAlign: TextAlign.end,
+                ),
+              ),
+            ),
+            getBottomSheetWidget(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget getBottomSheetWidget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        //Left arrow
+        Padding(
+          padding: const EdgeInsets.all(AppPadding.p14),
+          child: GestureDetector(
+            child: SizedBox(
+              height: AppSize.s20,
+              width: AppSize.s20,
+              child: SvgPicture.asset(ImageAssets.leftArrowIc),
+            ),
+            onTap: () {},
+          ),
+        ),
+
+        //Circle indicators
+
+        //Right arrow
+        Padding(
+          padding: const EdgeInsets.all(AppPadding.p14),
+          child: GestureDetector(
+            child: SizedBox(
+              height: AppSize.s20,
+              width: AppSize.s20,
+              child: SvgPicture.asset(ImageAssets.rightArrowIc),
+            ),
+            onTap: () {},
+          ),
+        ),
+      ],
     );
   }
 }
