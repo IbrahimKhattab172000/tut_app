@@ -70,10 +70,10 @@ class _OnboardingViewState extends State<OnboardingView> {
         },
         itemBuilder: (context, index) {
           return OnBoardingPage(
-            //*Approach1
-            //_list is a type List<SliderObject> but _list[index] is a SliderObject
+            //*Best Approach
+            //*_list is a type List<SliderObject> but _list[index] is a SliderObject
             sliderObject: _list[index],
-            //*Approach2
+            //*Approach2 here is dump cuz _list[] is already a sliderObject bro
             // sliderObject: SliderObject(
             //   _list[index].title,
             //   _list[index].subtitle,
@@ -117,12 +117,29 @@ class _OnboardingViewState extends State<OnboardingView> {
               width: AppSize.s20,
               child: SvgPicture.asset(ImageAssets.leftArrowIc),
             ),
-            onTap: () {},
+            onTap: () {
+              //go to the previous slide
+              _pageController.animateToPage(
+                _getPreviousIndex(),
+                duration: Duration(
+                  milliseconds: DurationConstant.d100,
+                ),
+                curve: Curves.bounceInOut,
+              );
+            },
           ),
         ),
 
         //Circle indicators
-
+        Row(
+          children: [
+            for (int i = 0; i < _list.length; i++)
+              Padding(
+                padding: EdgeInsets.all(AppPadding.p8),
+                child: _getProperCircle(index: i),
+              ),
+          ],
+        ),
         //Right arrow
         Padding(
           padding: const EdgeInsets.all(AppPadding.p14),
@@ -132,11 +149,46 @@ class _OnboardingViewState extends State<OnboardingView> {
               width: AppSize.s20,
               child: SvgPicture.asset(ImageAssets.rightArrowIc),
             ),
-            onTap: () {},
+            onTap: () {
+              //go to the next slide
+              _pageController.animateToPage(
+                _getNextIndex(),
+                duration: Duration(
+                  milliseconds: DurationConstant.d100,
+                ),
+                curve: Curves.bounceInOut,
+              );
+            },
           ),
         ),
       ],
     );
+  }
+
+  Widget _getProperCircle({required int index}) {
+    if (index == _currentIndex) {
+      return SvgPicture.asset(ImageAssets.hollowCirlceIc); //slected slider
+    } else {
+      return SvgPicture.asset(ImageAssets.solidCircleIc); //unselected slider
+    }
+  }
+
+  int _getPreviousIndex() {
+    int previousIndex = _currentIndex--; //-1
+    if (previousIndex == -1) {
+      //*Notice if the list has 4 items, that means 0,1,2,3 | I know u know that, but hell yeah I repeat it again
+      _currentIndex = _list.length -
+          1; //To create infinite loop and go to the the length of slider list
+    }
+    return _currentIndex;
+  }
+
+  int _getNextIndex() {
+    int nextIndex = _currentIndex++; //+!
+    if (nextIndex >= _list.length) {
+      _currentIndex = 0; //To create infinite loop and go to the first index
+    }
+    return _currentIndex;
   }
 }
 
