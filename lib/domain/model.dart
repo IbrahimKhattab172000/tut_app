@@ -24,7 +24,7 @@ class Customer {
 class Contacts {
   String phone;
   String link;
-  int email;
+  String email;
   Contacts(
     this.phone,
     this.link,

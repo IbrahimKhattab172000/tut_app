@@ -11,7 +11,7 @@ extension NonNullString on String? {
 
 //extension on Integer
 extension NonNullInteger on int? {
-  int onZero() {
+  int orZero() {
     if (this == null) {
       return 0;
     } else {
