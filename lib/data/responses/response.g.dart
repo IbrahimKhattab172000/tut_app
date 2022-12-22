@@ -49,7 +49,7 @@ AuthenticationResponse _$AuthenticationResponseFromJson(
     AuthenticationResponse(
       json['customer'] == null
           ? null
-          : BaseResponse.fromJson(json['customer'] as Map<String, dynamic>),
+          : CustomerResponse.fromJson(json['customer'] as Map<String, dynamic>),
       json['contacts'] == null
           ? null
           : ContactsResponse.fromJson(json['contacts'] as Map<String, dynamic>),
